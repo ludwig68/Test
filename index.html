@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechZone - Premium Store</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(45deg, #2563eb, #06b6d4);
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            overflow-x: hidden;
+        }
+
+        /* Navbar kiểu Glassmorphism */
+        .navbar {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Swiper Hero Section */
+        .hero-section {
+            padding: 20px 0;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* Danh mục tròn */
+        .category-item {
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .cat-icon {
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 10px;
+            box-shadow: var(--shadow-soft);
+            color: #444;
+            transition: 0.3s;
+        }
+        .category-item:hover .cat-icon {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* Card Sản phẩm cao cấp */
+        .product-card {
+            background: white;
+            border: none;
+            border-radius: 20px;
+            padding: 20px;
+            position: relative;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
+        }
+
+        .badge-sale {
+            background: #ff4757;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-weight: 600;
+        }
+
+        .product-img {
+            height: 220px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            transition: 0.4s;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+
+        .price-current {
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-add-cart {
+            background: var(--primary-gradient);
+            border: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-add-cart:hover {
+            opacity: 0.9;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #1e293b;
+            color: #94a3b8;
+            padding-top: 60px;
+        }
+        footer h5 { color: white; margin-bottom: 20px; }
+        footer a { color: #94a3b8; text-decoration: none; transition: 0.3s; }
+        footer a:hover { color: white; padding-left: 5px; }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary" href="#">
+                <i class="fa-solid fa-bolt"></i> TechZone
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link text-dark fw-bold" href="#">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">Điện thoại</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">Laptop</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">Tin tức</a></li>
+                </ul>
+                <div class="d-flex gap-3">
+                    <button class="btn btn-outline-dark rounded-circle border-0"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button class="btn btn-dark rounded-pill px-4 position-relative">
+                        <i class="fa-solid fa-bag-shopping me-2"></i> Giỏ hàng
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-light p-1">2</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div style="height: 80px;"></div>
+
+    <div class="container hero-section" data-aos="fade-down">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=1200&auto=format&fit=crop" alt="Banner 1">
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1678911820864-e2c567c655d7?q=80&w=1200&auto=format&fit=crop" alt="Banner 2">
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1556656793-02715d88bf05?q=80&w=1200&auto=format&fit=crop" alt="Banner 3">
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next text-white"></div>
+            <div class="swiper-button-prev text-white"></div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row g-4 justify-content-center">
+            <div class="col-4 col-md-2 category-item" data-aos="zoom-in" data-aos-delay="100">
+                <div class="cat-icon"><i class="fa-brands fa-apple"></i></div>
+                <span class="fw-bold">Apple</span>
+            </div>
+            <div class="col-4 col-md-2 category-item" data-aos="zoom-in" data-aos-delay="200">
+                <div class="cat-icon"><i class="fa-brands fa-android"></i></div>
+                <span class="fw-bold">Samsung</span>
+            </div>
+            <div class="col-4 col-md-2 category-item" data-aos="zoom-in" data-aos-delay="300">
+                <div class="cat-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                <span class="fw-bold">Xiaomi</span>
+            </div>
+            <div class="col-4 col-md-2 category-item" data-aos="zoom-in" data-aos-delay="400">
+                <div class="cat-icon"><i class="fa-solid fa-headphones-simple"></i></div>
+                <span class="fw-bold">Phụ kiện</span>
+            </div>
+            <div class="col-4 col-md-2 category-item" data-aos="zoom-in" data-aos-delay="500">
+                <div class="cat-icon"><i class="fa-solid fa-laptop"></i></div>
+                <span class="fw-bold">Laptop</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="container mb-5">
+        <div class="d-flex justify-content-between align-items-end mb-4" data-aos="fade-right">
+            <div>
+                <h6 class="text-primary fw-bold text-uppercase ls-1">Hot Sales</h6>
+                <h2 class="fw-bold">Sản Phẩm Bán Chạy</h2>
+            </div>
+            <a href="#" class="btn btn-outline-primary rounded-pill px-4">Xem tất cả</a>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="col" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card h-100">
+                    <span class="badge-sale">-20%</span>
+                    <div class="text-center">
+                        <img src="https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-blue-thumbnew-600x600.jpg" class="product-img" alt="iPhone">
+                    </div>
+                    <div class="text-secondary small mb-1">Apple</div>
+                    <h5 class="fw-bold text-dark text-truncate">iPhone 15 Pro Max 256GB</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="price-current">28.990.000₫</span>
+                        <small class="text-decoration-line-through text-muted">34tr</small>
+                    </div>
+                    <button class="btn-add-cart">
+                        <i class="fa-solid fa-cart-plus me-2"></i> Thêm vào giỏ
+                    </button>
+                </div>
+            </div>
+
+            <div class="col" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-card h-100">
+                    <span class="badge-sale bg-warning text-dark">-10%</span>
+                    <div class="text-center">
+                        <img src="https://cdn.tgdd.vn/Products/Images/42/307174/samsung-galaxy-s24-ultra-grey-thumbnew-600x600.jpg" class="product-img" alt="Samsung">
+                    </div>
+                    <div class="text-secondary small mb-1">Samsung</div>
+                    <h5 class="fw-bold text-dark text-truncate">Samsung Galaxy S24 Ultra</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="price-current">25.990.000₫</span>
+                        <small class="text-decoration-line-through text-muted">29tr</small>
+                    </div>
+                    <button class="btn-add-cart">
+                        <i class="fa-solid fa-cart-plus me-2"></i> Thêm vào giỏ
+                    </button>
+                </div>
+            </div>
+
+            <div class="col" data-aos="fade-up" data-aos-delay="300">
+                <div class="product-card h-100">
+                    <div class="text-center">
+                        <img src="https://cdn.tgdd.vn/Products/Images/42/309722/oppo-reno10-pro-plus-tim-thumbnew-600x600.jpg" class="product-img" alt="Oppo">
+                    </div>
+                    <div class="text-secondary small mb-1">OPPO</div>
+                    <h5 class="fw-bold text-dark text-truncate">OPPO Reno10 Pro+ 5G</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="price-current">19.990.000₫</span>
+                        <small class="text-muted">Mới ra mắt</small>
+                    </div>
+                    <button class="btn-add-cart">
+                        <i class="fa-solid fa-cart-plus me-2"></i> Thêm vào giỏ
+                    </button>
+                </div>
+            </div>
+
+             <div class="col" data-aos="fade-up" data-aos-delay="400">
+                <div class="product-card h-100">
+                    <span class="badge-sale bg-success">-5%</span>
+                    <div class="text-center">
+                        <img src="https://cdn.tgdd.vn/Products/Images/42/314144/xiaomi-13t-pro-xanh-duong-thumb-600x600.jpg" class="product-img" alt="Xiaomi">
+                    </div>
+                    <div class="text-secondary small mb-1">Xiaomi</div>
+                    <h5 class="fw-bold text-dark text-truncate">Xiaomi 13T Pro Leica</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="price-current">14.490.000₫</span>
+                        <small class="text-decoration-line-through text-muted">15tr</small>
+                    </div>
+                    <button class="btn-add-cart">
+                        <i class="fa-solid fa-cart-plus me-2"></i> Thêm vào giỏ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container pb-4">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <h5 class="text-white"><i class="fa-solid fa-bolt text-primary"></i> TechZone</h5>
+                    <p>Trải nghiệm mua sắm công nghệ đỉnh cao. Cam kết chính hãng, bảo hành trọn đời.</p>
+                </div>
+                <div class="col-md-2">
+                    <h5>Liên kết</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="#">Trang chủ</a></li>
+                        <li><a href="#">Sản phẩm</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Hỗ trợ</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                        <li><a href="#">Đổi trả hàng</a></li>
+                        <li><a href="#">Tra cứu đơn hàng</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Đăng ký nhận tin</h5>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Email của bạn...">
+                        <button class="btn btn-primary" type="button"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary mt-4">
+            <div class="text-center pt-2">
+                &copy; 2024 TechZone Premium. Designed with ❤️.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // 1. Khởi tạo Swiper (Slider)
+        var swiper = new Swiper(".mySwiper", {
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            effect: 'fade', // Hiệu ứng mờ dần thay vì trượt ngang
+        });
+
+        // 2. Khởi tạo AOS (Animation)
+        AOS.init({
+            duration: 1000, // Thời gian chạy hiệu ứng (ms)
+            once: true,     // Chỉ chạy 1 lần khi cuộn xuống
+            offset: 100     // Bắt đầu chạy khi cách mép dưới 100px
+        });
+    </script>
+</body>
+</html>
