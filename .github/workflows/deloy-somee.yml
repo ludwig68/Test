@@ -13,11 +13,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-          - name: FTP Deploy
+      - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWD }}
+
+          protocol: ftp
+          port: 21
+
+          # code trong repo (nếu index.php/index.html nằm ngay thư mục gốc)
           local-dir: ./
+
+          # đúng thư mục web somee
           server-dir: /www.nhattruong.somee.com/
