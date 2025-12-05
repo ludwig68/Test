@@ -19,12 +19,5 @@ jobs:
           server: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWD }}
-
-          protocol: ftp
-          port: 21
-
-          # code trong repo (nếu index.php/index.html nằm ngay thư mục gốc)
           local-dir: ./
-
-          # đúng thư mục web somee
           server-dir: /www.nhattruong.somee.com/
